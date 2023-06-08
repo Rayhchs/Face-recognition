@@ -1,12 +1,13 @@
 CC = g++
 CFLAGS = -c -Wall
-LDFLAGS = -L./lib -lface_AI -ltensorflow-lite -ldl -lpthread -L/usr/local/lib -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -lopencv_videoio -lsqlite3
+LDFLAGS = -L./lib -lface_AI -ltensorflow-lite -ldl -lpthread -lsqlite3 -L/usr/local/lib `pkg-config --libs opencv`
+LDFLAGS += -lyaml-cpp
 INCLUDE += -I/home/ray/tensorflow_src/
 INCLUDE += -I/home/ray/tflite_build/flatbuffers/include
 INCLUDE += -I/usr/local/include/opencv4
-SOURCES = test.cpp
+SOURCES = main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
-EXECUTABLE=test
+EXECUTABLE=main
 
 all: $(SOURCES) $(EXECUTABLE)
 
