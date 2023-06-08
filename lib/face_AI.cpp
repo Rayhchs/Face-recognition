@@ -14,10 +14,8 @@ using namespace cv;
 using namespace face_AI;
 
 // Face Detection
-void Face_Det::init_det(Detection_session *session_detect) {
+void Face_Det::init_det(Detection_session *session_detect, std::string model_dir) {
     
-    string model_dir = "./src/BlazeFace.tflite";
-
     // 加载模型文件
     session_detect->model =
         tflite::FlatBufferModel::BuildFromFile(model_dir.c_str());
@@ -182,10 +180,8 @@ std::vector<cv::Mat> Face_Det::inference_det(Mat &input, Detection_session *sess
 
 
 // Face Recognition
-void Face_Rec::init_rec(Recognition_session *session)
+void Face_Rec::init_rec(Recognition_session *session, string model_dir)
 {
-
-    string model_dir = "./src/TFNAS.tflite";
 
     // Load model
     session->model = tflite::FlatBufferModel::BuildFromFile(model_dir.c_str());

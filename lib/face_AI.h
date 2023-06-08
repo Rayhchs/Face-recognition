@@ -63,7 +63,7 @@ class Face_Det{
 
 public:
     // detection
-	void init_det(Detection_session *session_detect);
+	void init_det(Detection_session *session_detect, string model_dir);
 	std::vector<cv::Mat> inference_det(cv::Mat &input, Detection_session *session_detect, std::vector<PredBox> &face_list);
 
 private:
@@ -113,7 +113,7 @@ class Face_Rec{
 
 public: 
     // recognition
-    void init_rec(Recognition_session *session);
+    void init_rec(Recognition_session *session, string model_dir);
     int inference_rec(cv::Mat &face_in, std::vector<float> &face_feature,  Recognition_session *session);
 
 private:
