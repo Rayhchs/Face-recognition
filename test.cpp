@@ -10,8 +10,8 @@ using namespace cv;
 
 int main()
 {
-    string det_model_dir = "BlazeFace.tflite";
-    string rec_model_dir = "TFNAS.tflite";
+    string det_model_dir = "./models/Det.tflite";
+    string rec_model_dir = "./models/Rec.tflite";
     Mat img = cv::imread("noface.jpg");
 
     static Face_Det face_det;
