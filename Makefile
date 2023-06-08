@@ -5,9 +5,9 @@ LDFLAGS+= -L./lib -lface_AI
 INCLUDE += -I/home/ray/tensorflow_src/
 INCLUDE += -I/home/ray/tflite_build/flatbuffers/include
 INCLUDE += -I/usr/local/include/opencv4
-SOURCES = main.cpp
+SOURCES = test.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
-EXECUTABLE=main
+EXECUTABLE=test
 
 all: $(SOURCES) $(EXECUTABLE)
 
