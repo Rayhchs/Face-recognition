@@ -1,5 +1,6 @@
 #include "face_AI.h"
 #include <iostream>
+#include <numeric>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -16,7 +17,7 @@ using namespace face_AI;
 // Face Detection
 void Face_Det::init_det(Detection_session *session_detect, std::string model_dir) {
     
-    // 加载模型文件
+    // Load model
     session_detect->model =
         tflite::FlatBufferModel::BuildFromFile(model_dir.c_str());
 
@@ -26,7 +27,7 @@ void Face_Det::init_det(Detection_session *session_detect, std::string model_dir
         cout << "Invalid to load detecion model" << endl;
     }
 
-    // 创建解释器
+    // Create interpreter
     tflite::InterpreterBuilder(*session_detect->model, session_detect->resolver)(&session_detect->interpreter);
     if (!session_detect->interpreter)
     {
@@ -34,7 +35,7 @@ void Face_Det::init_det(Detection_session *session_detect, std::string model_dir
         cout << "Invalid to construct interpreter" << endl;
     }
 
-    // 分配张量缓冲区
+    // Allocate Tensors
     if(session_detect->interpreter->AllocateTensors() != kTfLiteOk)
     {
         cout << "Invalid to allocate" << endl;
@@ -276,6 +277,14 @@ int Face_Rec::inference_rec(Mat &face_in, std::vector<float> &face_feature, Reco
     for(int o_cnt = 0; o_cnt < session->o_size; o_cnt++)
     {
         face_feature[o_cnt] = session->interpreter->typed_output_tensor<float>(0)[o_cnt];
+    }
+
+    float norm = std::sqrt(std::accumulate(face_feature.begin(), face_feature.end(), 0.0f, [](float sum, float val) {
+        return sum + val * val;
+    }));
+    
+    for (float& value : face_feature) {
+    value /= norm;
     }
 
     return ret;
