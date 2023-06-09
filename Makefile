@@ -5,6 +5,7 @@ LDFLAGS += -lyaml-cpp
 INCLUDE += -I/home/ray/tensorflow_src/
 INCLUDE += -I/home/ray/tflite_build/flatbuffers/include
 INCLUDE += -I/usr/local/include/opencv4
+INCLUDE += -I /usr/include/eigen3
 SOURCES = main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE=main
