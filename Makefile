@@ -7,8 +7,9 @@ INCLUDE += -I/home/ray/tflite_build/flatbuffers/include
 INCLUDE += -I/usr/local/include/opencv4
 INCLUDE += -I /usr/include/eigen3
 SOURCES = main.cpp lib/utils.cpp lib/face_AI.cpp
+
 OBJECTS = $(SOURCES:.cpp=.o)
-EXECUTABLE=main
+EXECUTABLE=test
 
 all: $(SOURCES) $(EXECUTABLE)
 

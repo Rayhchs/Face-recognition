@@ -9,6 +9,10 @@ INCLUDE += -I/home/ray/tensorflow_src/
 INCLUDE += -I/home/ray/tflite_build/flatbuffers/include
 INCLUDE += -I/usr/local/include/opencv4
 
+
+TARGET := libface_AI.so
+SRCS := face_AI.cpp
+
 TARGET := libface_AI.so
 SRCS := face_AI.cpp
 
@@ -17,4 +21,5 @@ $(TARGET): $(SRCS) $(TFLITE)
 
 .PHONY: clean
 clean:
+
 	rm -f $(TARGET)
