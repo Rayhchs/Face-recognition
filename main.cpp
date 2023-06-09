@@ -40,16 +40,17 @@ int main(){
         return 1;
     }
     DT.Create_Table(db);
-
-    // char *sql = "INSERT INTO USERS VALUES (0, '0.1 0.999 0.888');";
-    // Insert(db, sql);
-
     cv::VideoCapture cap(0);
 
     if (!cap.isOpened()) {
         std::cout << "Cannot Open Camera" << std::endl;
         return -1;
     }
+
+    int Width = 640;
+    int Height = 480;
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, Width);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, Height);
 
     cv::Mat frame;
 
@@ -120,8 +121,7 @@ int main(){
 
                 Eigen::Index maxRow, maxCol;
                 double max = similarity.maxCoeff(&maxRow, &maxCol);
-                if (max >= 0.67){
-                    // cout << maxRow << maxCol << endl;
+                if (max >= 0.67){;
                     cout << "HI! " << querydata.q_id[maxRow][0] << endl;
                 }
                 else{
