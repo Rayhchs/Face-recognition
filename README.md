@@ -5,6 +5,7 @@ This repository contains code and resources for performing face recognition task
 ## Features
 
 * Face detection: Detecting faces in images or video streams.
+* Face alignment: Aligning faces to a standardized pose for accurate recognition.
 * Face recognition: Recognizing and identifying individuals based on their faces.
 
 
@@ -17,7 +18,7 @@ This repository contains code and resources for performing face recognition task
    cd Face-recognition
    ```
 
-2. Usage:
+## Usage
 
    ```bash
    make create_folder
