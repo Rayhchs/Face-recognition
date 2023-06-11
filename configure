@@ -1,0 +1,6 @@
+#!/bin/sh
+
+CC=gcc
+CFLAGS="-Wall -O2"
+
+echo "Configuration completed."
