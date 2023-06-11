@@ -20,7 +20,8 @@ This repository contains code and resources for performing face recognition task
 2. Usage:
 
    ```bash
-   make
+   make create_folder
+   make all
    ./main
    ```
    - press 'r' to register a face
