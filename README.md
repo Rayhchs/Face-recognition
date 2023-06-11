@@ -18,6 +18,18 @@ This repository contains code and resources for performing face recognition task
    cd Face-recognition
    ```
 
+2. Download rest libraries
+
+- sqlite3
+
+   ```bash
+   sudo apt install sqlite3
+   sudo apt install libsqlite3-dev
+   ```
+
+- yaml-cpp
+followed by https://github.com/jbeder/yaml-cpp
+
 ## Usage
 
    ```bash
