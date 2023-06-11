@@ -28,7 +28,8 @@ This repository contains code and resources for performing face recognition task
    ```
 
 - yaml-cpp
-followed by https://github.com/jbeder/yaml-cpp
+
+see https://github.com/jbeder/yaml-cpp for more
 
 ## Usage
 

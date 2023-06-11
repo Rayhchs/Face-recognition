@@ -1,12 +1,12 @@
 CC = g++
 CFLAGS = -c -Wall
-LDFLAGS = -ltensorflow-lite -ldl -lpthread -lsqlite3 -L/usr/local/lib `pkg-config --libs opencv`
+LDFLAGS = -L./lib -ltensorflow-lite -ldl -lpthread -lsqlite3 -L./lib `pkg-config --libs opencv`
 LDFLAGS += -lyaml-cpp
-INCLUDE += -I./include/tensorflow_src/
-INCLUDE += -I./include/flatbuffers/include
-INCLUDE += -I./include/opencv4
+INCLUDE += -I./include/tensorflow/
+INCLUDE += -I./include/flatbuffers/
+INCLUDE += -I./include/opencv4/
 INCLUDE += -I./include/eigen3
-SOURCES = main.cpp lib/utils.cpp lib/face_AI.cpp
+SOURCES = main.cpp common/utils.cpp common/face_AI.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE=main
