@@ -1,5 +1,5 @@
-#include "lib/face_AI.h"
-#include "lib/utils.h"
+#include "common/face_AI.h"
+#include "common/utils.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
