@@ -9,7 +9,7 @@ INCLUDE += -I./include/eigen3
 SOURCES = main.cpp lib/utils.cpp lib/face_AI.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
-EXECUTABLE=test
+EXECUTABLE=main
 
 all: $(SOURCES) $(EXECUTABLE)
 
