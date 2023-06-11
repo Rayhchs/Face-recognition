@@ -16,7 +16,7 @@ jobs:
     - name: Set execute permission for configure
       run: chmod +x configure
     - name: configure
-      run: sudo ./configure
+      run: ./configure
     - name: make
       run: make
     - name: make check
