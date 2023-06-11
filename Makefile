@@ -19,6 +19,9 @@ $(EXECUTABLE): $(OBJECTS)
 .cpp.o:
 	$(CC) $< -o $@ $(CFLAGS) $(INCLUDE)
 
+create_folder:
+	mkdir database
+
 clean:
 	rm -rf *o $(EXECUTABLE)
 
