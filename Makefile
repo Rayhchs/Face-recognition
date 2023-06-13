@@ -1,6 +1,7 @@
 CC = g++
 CFLAGS = -c -Wall
-LDFLAGS = -L./lib -L./lib -L./lib -L./lib -lsqlite3 -lyaml-cpp -ltensorflow-lite -ldl -lpthread `pkg-config --libs opencv`
+LDFLAGS += -L./lib -lpthread -ltensorflow-lite -ldl -lsqlite3 -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -lopencv_videoio
+LDFLAGS += -lyaml-cpp
 INCLUDE += -I./include/yaml-cpp/
 INCLUDE += -I./include/sqlite3/
 INCLUDE += -I./include/yaml-cpp/
@@ -12,9 +13,6 @@ SOURCES = main.cpp common/utils.cpp common/face_AI.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE=main
-
-# run:
-# 	export PKG_CONFIG_PATH=./lib/pkgconfig:$PKG_CONFIG_PATH && ./$(EXECUTABLE)
 
 all: $(SOURCES) $(EXECUTABLE)
 
