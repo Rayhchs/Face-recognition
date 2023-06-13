@@ -21,8 +21,6 @@ jobs:
     - name: List Available Packages
       run: |
         pkg-config --list-all
-    - name: check lpthread
-      run: find /usr -name libpthread_nonshared.a
     - name: make
       run: make
     - name: make check
