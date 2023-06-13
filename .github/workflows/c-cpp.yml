@@ -12,8 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: configure
+    - uses: actions/checkout@v2
+    - name: Set execute permission for configure
+      run: chmod +x configure
+
+    - name: Run configure
       run: ./configure
     - name: make
       run: make
