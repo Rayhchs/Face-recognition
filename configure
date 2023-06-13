@@ -2,5 +2,6 @@
 
 CC=gcc
 CFLAGS="-Wall -O2"
+sudo apt-get install libc6-dev
 
 echo "Configuration completed."
