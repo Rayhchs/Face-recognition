@@ -17,7 +17,7 @@ jobs:
       PKG_CONFIG_PATH: ./lib/pkgconfig:$PKG_CONFIG_PATH
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set execute permission for configure
       run: chmod +x configure
     - name: Set up Build Environment
