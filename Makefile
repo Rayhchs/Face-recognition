@@ -12,8 +12,8 @@ SOURCES = main.cpp common/utils.cpp common/face_AI.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE=main
 
-run:
-	export PKG_CONFIG_PATH=./lib/pkgconfig:$PKG_CONFIG_PATH && ./$(EXECUTABLE)
+# run:
+# 	export PKG_CONFIG_PATH=./lib/pkgconfig:$PKG_CONFIG_PATH && ./$(EXECUTABLE)
 
 all: $(SOURCES) $(EXECUTABLE)
 
