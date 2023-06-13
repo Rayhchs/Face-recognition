@@ -24,6 +24,9 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential
+    - name: Check Library File
+      run: |
+        ls /usr/lib/x86_64-linux-gnu/libpthread_nonshared.a
     - name: Run configure
       run: ./configure
     
