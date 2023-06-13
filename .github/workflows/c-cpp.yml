@@ -5,11 +5,16 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+    
+env:
+  PKG_CONFIG_PATH: ./lib/pkgconfig:$PKG_CONFIG_PATH
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      PKG_CONFIG_PATH: ./lib/pkgconfig:$PKG_CONFIG_PATH
 
     steps:
     - uses: actions/checkout@v2
@@ -21,6 +26,10 @@ jobs:
         sudo apt-get install -y libc6-dev
     - name: Run configure
       run: ./configure
+    
+    - name: List Available Packages
+      run: |
+        pkg-config --list-all
     - name: make
       run: make
     - name: make check
