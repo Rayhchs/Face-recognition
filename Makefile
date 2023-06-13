@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -c -Wall
-LDFLAGS += -L./lib -ltensorflow-lite -ldl -lpthread -Wl,-rpath='$ORIGIN/lib' -lsqlite3 -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -lopencv_videoio
+LDFLAGS += -L./lib -ltensorflow-lite -ldl -L./lib/pthread -lpthread -lsqlite3 -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -lopencv_videoio
 LDFLAGS += -lyaml-cpp
-LDFLAGS += -L/usr/lib/x86_64-linux-gnu -pthread
+LDFLAGS += -lpthread_nonshared -Wl,-rpath='$ORIGIN/lib/pthread
 INCLUDE += -I./include/yaml-cpp/
 INCLUDE += -I./include/sqlite3/
 INCLUDE += -I./include/tensorflow/
