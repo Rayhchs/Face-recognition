@@ -3,6 +3,7 @@ CFLAGS = -c -Wall
 LDFLAGS = -L./lib -ltensorflow-lite -ldl -lpthread -lsqlite3 `pkg-config --libs opencv`
 LDFLAGS += -lyaml-cpp
 INCLUDE += -I./include/sqlite3/
+INCLUDE += -I./include/yaml-cpp/
 INCLUDE += -I./include/tensorflow/
 INCLUDE += -I./include/flatbuffers/
 INCLUDE += -I./include/opencv4/
