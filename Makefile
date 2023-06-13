@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -c -Wall
-LDFLAGS += -L./lib ./lib/libpthread_nonshared.a -ltensorflow-lite -ldl -lpthread -lsqlite3 -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -lopencv_videoio
+LDFLAGS += -lpthread -L./lib -ltensorflow-lite -ldl -lsqlite3 -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -lopencv_videoio
 LDFLAGS += -lyaml-cpp
 INCLUDE += -I./include/yaml-cpp/
 INCLUDE += -I./include/sqlite3/
