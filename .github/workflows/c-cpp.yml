@@ -18,18 +18,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set execute permission for configure
-      run: chmod +x configure
-    - name: Set up Build Environment
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential
-#     - name: Check Library File
-#       run: |
-#         ls /usr/lib/x86_64-linux-gnu/libpthread_nonshared.a
-    - name: Run configure
-      run: ./configure
-    
     - name: List Available Packages
       run: |
         pkg-config --list-all
