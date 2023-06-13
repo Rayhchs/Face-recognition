@@ -15,7 +15,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set execute permission for configure
       run: chmod +x configure
-
+    - name: Set up Build Environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libc6-dev
     - name: Run configure
       run: ./configure
     - name: make
