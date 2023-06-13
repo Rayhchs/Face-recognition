@@ -18,8 +18,6 @@ jobs:
 
     - name: Run configure
       run: ./configure
-    - name: make run
-      run: make run
     - name: make
       run: make
     - name: make check
