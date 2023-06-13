@@ -1,7 +1,6 @@
 CC = g++
 CFLAGS = -c -Wall
-LDFLAGS = -L./lib -ltensorflow-lite -L./lib -ldl -L./lib -lpthread -L./lib -lsqlite3 -L./lib `pkg-config --libs opencv`
-LDFLAGS += -lyaml-cpp
+LDFLAGS = -L./lib -L./lib -L./lib -L./lib -lsqlite3 -lyaml-cpp -ltensorflow-lite -ldl -lpthread `pkg-config --libs opencv`
 INCLUDE += -I./include/yaml-cpp/
 INCLUDE += -I./include/sqlite3/
 INCLUDE += -I./include/yaml-cpp/
