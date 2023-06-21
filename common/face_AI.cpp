@@ -15,7 +15,8 @@ using namespace cv;
 using namespace face_AI;
 
 // Face Detection
-void Face_Det::init_det(Detection_session *session_detect, std::string model_dir) {
+void Face_Det::init_det(Detection_session *session_detect, std::string model_dir)
+{
     
     // Load model
     session_detect->model =
@@ -24,7 +25,7 @@ void Face_Det::init_det(Detection_session *session_detect, std::string model_dir
     if (!session_detect->model)
     {
 
-        cout << "Invalid to load detecion model" << endl;
+        std::cout << "Invalid to load detecion model" << std::endl;
     }
 
     // Create interpreter
@@ -32,13 +33,13 @@ void Face_Det::init_det(Detection_session *session_detect, std::string model_dir
     if (!session_detect->interpreter)
     {
 
-        cout << "Invalid to construct interpreter" << endl;
+        std::cout << "Invalid to construct interpreter" << std::endl;
     }
 
     // Allocate Tensors
     if(session_detect->interpreter->AllocateTensors() != kTfLiteOk)
     {
-        cout << "Invalid to allocate" << endl;
+        std::cout << "Invalid to allocate" << std::endl;
     }
 
     // Get input 
@@ -69,32 +70,29 @@ void Face_Det::init_det(Detection_session *session_detect, std::string model_dir
 }
 
 
-std::vector<cv::Mat> Face_Det::inference_det(Mat &input, Detection_session *session_detect, vector<PredBox> &face_list)
+std::vector<cv::Mat> Face_Det::inference_det(Mat &input, Detection_session *session_detect, std::vector<PredBox> &face_list)
 {
     int ret = 0;
-    vector<Mat> faces;
+    std::vector<Mat> faces;
 
     // check image source
     if (input.empty()){
-        std::cout<<"Invalid to input Mat!"<<std::endl;
+        std::cout << "Invalid to input Mat!" << std::endl;
         return faces;
     }
 
-    int max_edge_size;
-    int min_edge_size;
-    if (input.cols >input.rows)
+    int max_size;
+    if (input.cols > input.rows)
     {
-        max_edge_size = input.cols;
-        min_edge_size = input.rows;
+        max_size = input.cols;
     }else
     {
-        max_edge_size = input.rows;
-        min_edge_size = input.cols;
+        max_size = input.rows;
     }
 
     // Put image into square
-    Mat scale_img = Mat(max_edge_size,max_edge_size,CV_8UC3, Scalar(104,117,123));
-    Rect Roi = Rect(0,0,input.cols,input.rows);
+    Mat scale_img = Mat(max_size, max_size, CV_8UC3, Scalar(104,117,123));
+    Rect Roi = Rect(0, 0, input.cols, input.rows);
     input.copyTo(scale_img(Roi));
     Mat img = scale_img.clone();
 
@@ -129,7 +127,6 @@ std::vector<cv::Mat> Face_Det::inference_det(Mat &input, Detection_session *sess
         session_detect->interpreter->typed_input_tensor<float>(0)[i] = (dst_data[i]);
     }
 
-
     // Invoke
     ret = session_detect->interpreter->Invoke();
     if(ret)
@@ -139,9 +136,9 @@ std::vector<cv::Mat> Face_Det::inference_det(Mat &input, Detection_session *sess
     }
 
     std::vector<PredBox> bbox_collection;
-    float *score    =  (float*)session_detect->interpreter->typed_output_tensor<float>(0);//0
-    float *landmark =  (float*)session_detect->interpreter->typed_output_tensor<float>(1);//1
-    float *bbox     =  (float*)session_detect->interpreter->typed_output_tensor<float>(2);//2
+    float *score    =  (float*)session_detect->interpreter->typed_output_tensor<float>(0);
+    float *landmark =  (float*)session_detect->interpreter->typed_output_tensor<float>(1);
+    float *bbox     =  (float*)session_detect->interpreter->typed_output_tensor<float>(2);
 
     CalBoxes(bbox_collection, score, landmark, bbox);
     NMS(bbox_collection, face_list);
@@ -181,12 +178,11 @@ std::vector<cv::Mat> Face_Det::inference_det(Mat &input, Detection_session *sess
 
 
 // Face Recognition
-void Face_Rec::init_rec(Recognition_session *session, string model_dir)
+void Face_Rec::init_rec(Recognition_session *session, std::string model_dir)
 {
 
     // Load model
     session->model = tflite::FlatBufferModel::BuildFromFile(model_dir.c_str());
-
 
     if (!session->model)
     {
@@ -217,7 +213,8 @@ void Face_Rec::init_rec(Recognition_session *session, string model_dir)
 
     session->i_height = input_dims->data[1];  // height
     session->i_width = input_dims->data[2];   // width
-    session->i_channels = input_dims->data[3]; // channels ?
+    session->i_channels = input_dims->data[3]; // channels
+
     // get output(0) size
     int output = session->interpreter->outputs()[0];
     TfLiteIntArray* output_dims = session->interpreter->tensor(output)->dims;
@@ -231,8 +228,8 @@ int Face_Rec::inference_rec(Mat &face_in, std::vector<float> &face_feature, Reco
 
     // check image source
     if (face_in.empty()){
-        cout << "Failed to input Mat!" << endl;
-        return -1;
+        std::cout << "Failed to input Mat!" << std::endl;
+        return 1;
     }
 
     // resize the face_in size according to NN input size.
@@ -243,7 +240,7 @@ int Face_Rec::inference_rec(Mat &face_in, std::vector<float> &face_feature, Reco
     if(face_resize.channels() != 3)
     {
         cout << "Invalid channels!" << endl;
-        return -1;
+        return 1;
     }
 
     // Input tensor
@@ -268,7 +265,7 @@ int Face_Rec::inference_rec(Mat &face_in, std::vector<float> &face_feature, Reco
 
     if(ret)
     {
-        return -1;
+        return 1;
     }
 
     // read out and fill data to output vector
@@ -296,8 +293,8 @@ int Face_Rec::inference_rec(Mat &face_in, std::vector<float> &face_feature, Reco
 void Face_Det::CalBoxes(std::vector<PredBox> &bbox_collection,
                         float *score_data,
                         float *landmark_data,
-                        float *bbox_data) {
-
+                        float *bbox_data)
+{
     for (int i = 0; i < num_priors; i++) {
         if (score_data[i * 2 +1] > score_threshold) {
 
@@ -325,8 +322,8 @@ void Face_Det::CalBoxes(std::vector<PredBox> &bbox_collection,
     }
 }
 
-void Face_Det::GenPriorBox(){
-
+void Face_Det::GenPriorBox()
+{
     std::vector<std::vector<float>> featuremap_size;
     std::vector<std::vector<float>> shrinkage_size;
     auto w_h_list = {in_w, in_h};
@@ -362,7 +359,8 @@ void Face_Det::GenPriorBox(){
     }
 }
 
-void Face_Det::NMS(std::vector<PredBox> &input, std::vector<PredBox> &output) {
+void Face_Det::NMS(std::vector<PredBox> &input, std::vector<PredBox> &output)
+{
     std::sort(input.begin(), input.end(), [](const PredBox &a, const PredBox &b) { return a.score > b.score; });
     output.clear();
 
@@ -389,15 +387,13 @@ void Face_Det::NMS(std::vector<PredBox> &input, std::vector<PredBox> &output) {
 
             float inner_x0 = input[i].x1 > input[j].x1 ? input[i].x1 : input[j].x1;
             float inner_y0 = input[i].y1 > input[j].y1 ? input[i].y1 : input[j].y1;
-
             float inner_x1 = input[i].x2 < input[j].x2 ? input[i].x2 : input[j].x2;
             float inner_y1 = input[i].y2 < input[j].y2 ? input[i].y2 : input[j].y2;
 
             float inner_h = inner_y1 - inner_y0 + 1;
             float inner_w = inner_x1 - inner_x0 + 1;
-
-            if (inner_h <= 0 || inner_w <= 0)
-                continue;
+            inner_h = inner_h > 0 ? inner_h : 0;
+            inner_w = inner_w > 0 ? inner_w : 0;
 
             float inner_area = inner_h * inner_w;
 
@@ -406,9 +402,7 @@ void Face_Det::NMS(std::vector<PredBox> &input, std::vector<PredBox> &output) {
 
             float area1 = h1 * w1;
 
-            float score;
-
-            score = inner_area / (area0 + area1 - inner_area);
+            float score = inner_area / (area0 + area1 - inner_area);
 
             if (score > iou_threshold) {
                 merged[j] = 1;
@@ -419,20 +413,22 @@ void Face_Det::NMS(std::vector<PredBox> &input, std::vector<PredBox> &output) {
     }
 }
 
-Mat Face_Det::face_Alignment(Mat Img, float landmarks[5][2]){
+Mat Face_Det::face_Alignment(Mat Img, float landmarks[5][2])
+{
     Mat result;
     Mat src(5,2,CV_32FC1, points_dst);
     memcpy(src.data, points_dst, 2 * 5 * sizeof(float));
     Mat dst(5,2,CV_32FC1, landmarks);
     memcpy(dst.data, landmarks, 2 * 5 * sizeof(float));
 
-    Mat M = similar_Transform(dst, src);  // skimage.transform.SimilarityTransform
+    Mat M = similar_Transform(dst, src);
     warpPerspective(Img, result, M, Size(112, 112));
 
     return result;
 }
 
-Mat Face_Det::similar_Transform(Mat src, Mat dst) {
+Mat Face_Det::similar_Transform(Mat src, Mat dst)
+{
     int num = src.rows;
     int dim = src.cols;
     Mat src_mean = mean_Axis(src);
@@ -450,7 +446,6 @@ Mat Face_Det::similar_Transform(Mat src, Mat dst) {
     Mat U, S, V;
     SVD::compute(A, S,U, V);
 
-    // the SVD function in opencv differ from scipy .
     int rank = matrix_Rank(A);
     if (rank == 0) {
         assert(rank == 0);

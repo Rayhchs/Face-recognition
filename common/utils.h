@@ -12,12 +12,14 @@ using namespace std;
 
 
 namespace Utils{
-struct QueryData {
+struct QueryData
+{
     std::vector<std::vector<float>> qdata;
     std::vector<std::vector<std::string>> q_id;
 };
 
-class DB_tools{
+class DB_tools
+{
 public:
     int Create_Table(sqlite3* db);
     int Insert(sqlite3* db, int id, string feat_str);
@@ -27,7 +29,8 @@ private:
     static int callback(void* data, int argc, char** argv, char** azColName);
 };
 
-class Tools{
+class Tools
+{
 public:
     void Vec2Str(std::vector<float>& vec, std::string& str);
     Eigen::MatrixXf Vec2Eig(std::vector<std::vector<float>>& data);
