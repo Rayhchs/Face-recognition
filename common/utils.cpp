@@ -8,7 +8,8 @@ using namespace std;
 using namespace Utils;
 
 
-int DB_tools::Create_Table(sqlite3* db){
+int DB_tools::Create_Table(sqlite3* db)
+{
     int result_create = sqlite3_exec(db, "CREATE TABLE USERS(id, feature)", NULL, NULL, NULL);
     if (result_create != SQLITE_OK) {
         cout << "Something Wrong when creating table!" << endl;
@@ -18,7 +19,8 @@ int DB_tools::Create_Table(sqlite3* db){
     return 0;
 }
 
-int DB_tools::Insert(sqlite3* db, int id, string feat_str){
+int DB_tools::Insert(sqlite3* db, int id, string feat_str)
+{
     sqlite3_stmt *stmt;
     const char *tail;
     string sql = "INSERT INTO USERS (id, feature) VALUES (?, ?)";
@@ -38,7 +40,8 @@ int DB_tools::Insert(sqlite3* db, int id, string feat_str){
 }
 
 
-int DB_tools::callback(void* data, int argc, char** argv, char** azColName) {
+int DB_tools::callback(void* data, int argc, char** argv, char** azColName)
+{
 
     QueryData* querydata = static_cast<QueryData*>(data);
 
@@ -68,7 +71,8 @@ int DB_tools::callback(void* data, int argc, char** argv, char** azColName) {
 }
 
 
-int DB_tools::Query(sqlite3* db, QueryData& querydata) {
+int DB_tools::Query(sqlite3* db, QueryData& querydata)
+{
 
     char* sql = "SELECT * FROM USERS";
     char* errMsg = nullptr;
@@ -84,7 +88,8 @@ int DB_tools::Query(sqlite3* db, QueryData& querydata) {
 }
 
 
-void Tools::Vec2Str(std::vector<float>& vec, std::string& str) {
+void Tools::Vec2Str(std::vector<float>& vec, std::string& str)
+{
     
     std::stringstream ss;
     for (auto& f : vec) {
@@ -95,7 +100,8 @@ void Tools::Vec2Str(std::vector<float>& vec, std::string& str) {
 }
 
 
-Eigen::MatrixXf Tools::Vec2Eig(std::vector<std::vector<float>>& data){
+Eigen::MatrixXf Tools::Vec2Eig(std::vector<std::vector<float>>& data)
+{
     int n = data.size();
     int m = data[0].size();
     Eigen::MatrixXf matrix(n, m);

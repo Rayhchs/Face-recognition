@@ -13,7 +13,8 @@ using namespace std;
 
 namespace face_AI{
 
-struct Detection_session{
+struct Detection_session
+{
 
     std::unique_ptr<tflite::FlatBufferModel> model;
     tflite::ops::builtin::BuiltinOpResolver resolver;
@@ -32,7 +33,8 @@ struct Detection_session{
 
 };
 
-struct Recognition_session{
+struct Recognition_session
+{
 
     std::unique_ptr<tflite::FlatBufferModel> model;
     tflite::ops::builtin::BuiltinOpResolver resolver;
@@ -45,7 +47,8 @@ struct Recognition_session{
 
 };
 
-struct PredBox {
+struct PredBox
+{
 
     float x1 = 0;
     float y1 = 0;
@@ -59,7 +62,8 @@ struct PredBox {
 
 };
 
-class Face_Det{
+class Face_Det
+{
 
 public:
     // detection
@@ -109,7 +113,8 @@ private:
 };
 
 
-class Face_Rec{
+class Face_Rec
+{
 
 public: 
     // recognition

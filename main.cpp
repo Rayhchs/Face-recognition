@@ -17,8 +17,8 @@ using namespace cv;
 using namespace Utils;
 
 
-int main(){
-
+int main()
+{
     // Utils
     static DB_tools DT;
     static Tools tools;
