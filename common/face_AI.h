@@ -62,8 +62,7 @@ struct PredBox
 
 };
 
-class Face_Det
-{
+class Face_Det{
 
 public:
     // detection
@@ -95,6 +94,8 @@ private:
         { 48.0252f + 8.0f, 71.7366f },
         { 24.0f, 93.0f },
         {88.0f , 93.0f }
+        // { 17.0f, 61.0f },
+        // {93.0f , 64.0f }
     };
 
 	// Computation for detection
@@ -113,8 +114,7 @@ private:
 };
 
 
-class Face_Rec
-{
+class Face_Rec{
 
 public: 
     // recognition

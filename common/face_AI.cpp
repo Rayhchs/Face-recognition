@@ -168,7 +168,6 @@ std::vector<cv::Mat> Face_Det::inference_det(Mat &input, Detection_session *sess
         for (int j = 0; j<5; j++){
             landmarks[j][0]= scale_x * face.key_points[j].first;
             landmarks[j][1]= scale_y * face.key_points[j].second;
-
         }
         auto align_mat = face_Alignment(temp_img, landmarks);
         faces.push_back(align_mat);
