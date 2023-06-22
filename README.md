@@ -35,7 +35,7 @@ see https://github.com/jbeder/yaml-cpp for more
 
    ```bash
    make create_folder
-   make all
+   make
    ./main
    ```
    - press 'r' to register a face
@@ -43,7 +43,10 @@ see https://github.com/jbeder/yaml-cpp for more
    - press 'q' to quit
 
 ## Models
-* Detection model, $Det.tflite$ is blazeface.
-* Recognition model, $Rec.tflite$ is MobileFaceNet converted from pretrain model of [FaceX-zoo](https://github.com/JDAI-CV/FaceX-Zoo/tree/main/training_mode).
+* Detection model, $./models/Det.tflite$ is [Blazeface](https://arxiv.org/abs/1907.05047) which is converted from pretrain model of [blazeface](https://github.com/zineos/blazeface).
+* Recognition model, $./models/Rec.tflite$ is [MobileFaceNet](https://arxiv.org/abs/1804.07573) converted from pretrain model of [FaceX-zoo](https://github.com/JDAI-CV/FaceX-Zoo/tree/main/training_mode).
 
 Recognition model can be changed to any kind of tflite model. However, Detection model cannot.
+
+## Acknowledge
+Code and model heavily borrows from [zineos_blazeface](https://github.com/zineos/blazeface) and [FaceX-zoo](https://github.com/JDAI-CV/FaceX-Zoo/tree/main/training_mode). Thanks for the excellent work!
