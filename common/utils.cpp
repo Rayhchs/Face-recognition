@@ -80,7 +80,7 @@ int DB_tools::Query(sqlite3* db, QueryData& querydata)
     // 執行查詢語句
     int rc = sqlite3_exec(db, sql, callback, &querydata, &errMsg);
     if (rc != SQLITE_OK) {
-        std::cerr << "查詢出錯: " << errMsg << std::endl;
+        std::cerr << "Wrong: " << errMsg << std::endl;
         sqlite3_free(errMsg);
         return 1;
     }

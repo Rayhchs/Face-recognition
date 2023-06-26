@@ -98,6 +98,7 @@ int main()
             // Inference Detection
             vector<PredBox> face_list;
             auto temp_img = face_det.inference_det(frame, &session_Detect, face_list);
+            // cv::imwrite("test.jpg",temp_img[0]);
             if (int(face_list.size()) <= 0){
                 cout << "No Face!" << endl;
             }
@@ -114,6 +115,10 @@ int main()
                 // Query database
                 QueryData querydata;
                 DT.Query(db, querydata);
+                if (querydata.qdata.size() == 0){
+                    cout << "Database is empty" << endl;
+                    return 1;
+                }
                 Eigen::MatrixXf database_matrix = tools.Vec2Eig(querydata.qdata);
 
                 // Calculate similarity
