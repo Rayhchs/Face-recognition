@@ -63,7 +63,7 @@ class Face_Det{
 
 public:
     // detection
-	void init_det(Detection_session *session_detect);
+	void init_det(Detection_session *session_detect, std::string model_dir);
 	std::vector<cv::Mat> inference_det(cv::Mat &input, Detection_session *session_detect, std::vector<PredBox> &face_list);
 
 private:
@@ -86,11 +86,11 @@ private:
 
 	// Variables for face alignment
     float points_dst[5][2] = {
-        { 30.2946f + 8.0f, 51.6963f },
-        { 65.5318f + 8.0f, 51.5014f },
-        { 48.0252f + 8.0f, 71.7366f },
-        { 24.0f, 93.0f },
-        {88.0f , 93.0f }
+        { 38.2946f, 51.6963f },
+        { 73.5318f, 51.5014f },
+        { 56.0252f, 71.7366f },
+        { 41.05493f, 92.3655f },
+        { 70.7299f , 92.2041f }
     };
 
 	// Computation for detection
@@ -113,7 +113,7 @@ class Face_Rec{
 
 public: 
     // recognition
-    void init_rec(Recognition_session *session);
+    void init_rec(Recognition_session *session, string model_dir);
     int inference_rec(cv::Mat &face_in, std::vector<float> &face_feature,  Recognition_session *session);
 
 private:
